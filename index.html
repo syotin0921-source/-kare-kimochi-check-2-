@@ -141,9 +141,7 @@ h1{
   font-weight:900;
 }
 
-.featureIcon{
-  font-size:25px;
-}
+.featureIcon{font-size:25px}
 
 .featureTitle{
   font-size:17px;
@@ -344,7 +342,7 @@ h1{
 
 
 /* =========================
-   💗 紙吹雪
+   💗 ゆっくり紙吹雪
 ========================= */
 
 .confetti-container{
@@ -360,33 +358,61 @@ h1{
 .confetti{
   position:absolute;
   top:-30px;
-  width:10px;
-  height:16px;
   border-radius:3px;
   opacity:0;
-  animation:confettiFall 1.8s ease-out forwards;
+  animation-name:confettiFall;
+  animation-timing-function:linear;
+  animation-fill-mode:forwards;
 }
 
 @keyframes confettiFall{
+
   0%{
+    opacity:0;
+    transform:
+      translate3d(0,-30px,0)
+      rotate(0deg);
+  }
+
+  8%{
     opacity:1;
-    transform:translate3d(0,-20px,0) rotate(0deg);
+  }
+
+  25%{
+    transform:
+      translate3d(calc(var(--drift) * .35),25vh,0)
+      rotate(calc(var(--rotate) * .25));
+  }
+
+  50%{
+    transform:
+      translate3d(calc(var(--drift) * -.2),52vh,0)
+      rotate(calc(var(--rotate) * .5));
+  }
+
+  75%{
+    opacity:1;
+    transform:
+      translate3d(calc(var(--drift) * .65),78vh,0)
+      rotate(calc(var(--rotate) * .75));
   }
 
   100%{
     opacity:0;
-    transform:translate3d(var(--drift),105vh,0) rotate(var(--rotate));
+    transform:
+      translate3d(var(--drift),108vh,0)
+      rotate(var(--rotate));
   }
 }
 
 .party-pop{
   position:fixed;
   z-index:10000;
-  bottom:18%;
-  font-size:56px;
+  bottom:16%;
+  font-size:58px;
   pointer-events:none;
   opacity:0;
-  animation:partyPop 1.5s ease-out forwards;
+  animation:partyPop 2.3s ease-out forwards;
 }
 
 .party-pop.left{
@@ -400,23 +426,24 @@ h1{
 }
 
 @keyframes partyPop{
+
   0%{
     opacity:0;
-    margin-bottom:-20px;
+    margin-bottom:-15px;
   }
 
-  20%{
+  12%{
     opacity:1;
     margin-bottom:0;
   }
 
-  75%{
+  72%{
     opacity:1;
   }
 
   100%{
     opacity:0;
-    margin-bottom:25px;
+    margin-bottom:15px;
   }
 }
 
@@ -467,6 +494,7 @@ h1{
 
   .question{font-size:20px}
 }
+
 </style>
 </head>
 
@@ -479,9 +507,9 @@ h1{
 <div class="brand">あと1分。</div>
 
 <img
-  class="hero"
-  src="./hero-girl.png"
-  alt="スマホを持つ女性のイラスト"
+class="hero"
+src="./hero-girl.png"
+alt="スマホを持つ女性のイラスト"
 >
 
 <h1>彼の気持ちチェック②</h1>
@@ -508,9 +536,7 @@ h1{
 <div class="featureNo">01</div>
 <div>
 <div class="featureTitle">会っているときの彼</div>
-<div class="featureText">
-笑顔・会話・気遣いなど、目の前のあなたへの行動。
-</div>
+<div class="featureText">笑顔・会話・気遣いなど、目の前のあなたへの行動。</div>
 </div>
 <div class="featureIcon">☺️</div>
 </div>
@@ -519,9 +545,7 @@ h1{
 <div class="featureNo">02</div>
 <div>
 <div class="featureTitle">恋愛としての好意</div>
-<div class="featureText">
-好意が伝わる言葉と、彼から次へ進もうとする行動。
-</div>
+<div class="featureText">好意が伝わる言葉と、彼から次へ進もうとする行動。</div>
 </div>
 <div class="featureIcon">💗</div>
 </div>
@@ -530,9 +554,7 @@ h1{
 <div class="featureNo">03</div>
 <div>
 <div class="featureTitle">デート後の彼</div>
-<div class="featureText">
-LINEや次のデートにつながる行動から総合的に判断。
-</div>
+<div class="featureText">LINEや次のデートにつながる行動から総合的に判断。</div>
 </div>
 <div class="featureIcon">💬</div>
 </div>
@@ -562,9 +584,7 @@ LINEや次のデートにつながる行動から総合的に判断。
 </div>
 
 <div class="quizCard">
-
 <div class="qno" id="qno"></div>
-
 <div class="question" id="question"></div>
 
 <div id="hint" class="hint hidden">
@@ -572,7 +592,6 @@ LINEや次のデートにつながる行動から総合的に判断。
 </div>
 
 <div class="options" id="options"></div>
-
 </div>
 
 <div class="nav">
@@ -625,24 +644,16 @@ LINEや次のデートにつながる行動から総合的に判断。
 <div class="resultSub" id="rSub"></div>
 </div>
 
-<div class="sectionTitle">
-01　今回確認できた彼の行動
-</div>
+<div class="sectionTitle">01　今回確認できた彼の行動</div>
 <div class="card" id="confirmed"></div>
 
-<div class="sectionTitle">
-02　これから見ていくポイント
-</div>
+<div class="sectionTitle">02　これから見ていくポイント</div>
 <div class="card" id="watch"></div>
 
-<div class="sectionTitle">
-03　今のあなたにやってほしいこと
-</div>
+<div class="sectionTitle">03　今のあなたにやってほしいこと</div>
 <div class="tip" id="advice"></div>
 
-<div class="sectionTitle">
-僕からあなたへ
-</div>
+<div class="sectionTitle">僕からあなたへ</div>
 <div class="card" id="message"></div>
 
 <button class="btn resultButton" onclick="restart()">
@@ -660,329 +671,165 @@ LINEや次のデートにつながる行動から総合的に判断。
 <script>
 
 const qs=[
-
 {
 q:"会っているとき、彼は笑顔が多く、楽しそうにしていましたか？",
-o:[
-"よく笑っていて、楽しそうにしていた",
-"ときどき笑顔があり、楽しそうな様子もあった",
-"あまり笑顔はなく、楽しそうか分からなかった",
-"ほとんど笑顔がなく、楽しそうには見えなかった"
-],
+o:["よく笑っていて、楽しそうにしていた","ときどき笑顔があり、楽しそうな様子もあった","あまり笑顔はなく、楽しそうか分からなかった","ほとんど笑顔がなく、楽しそうには見えなかった"],
 p:[3,2,1,0]
 },
-
 {
 q:"彼から、あなたについて質問してくれましたか？",
-o:[
-"彼から何度も質問してくれた",
-"彼からいくつか質問してくれた",
-"質問は少しだけだった",
-"ほとんど質問されなかった"
-],
+o:["彼から何度も質問してくれた","彼からいくつか質問してくれた","質問は少しだけだった","ほとんど質問されなかった"],
 p:[3,2,1,0]
 },
-
 {
 q:"あなたが話したことから、さらに会話を広げようとしてくれましたか？",
-o:[
-"質問を返したり、話を広げたりしてくれることが何度もあった",
-"何度かあった",
-"ほとんどなく、相づちで終わることが多かった",
-"ほとんど会話を広げようとする様子はなかった"
-],
+o:["質問を返したり、話を広げたりしてくれることが何度もあった","何度かあった","ほとんどなく、相づちで終わることが多かった","ほとんど会話を広げようとする様子はなかった"],
 p:[3,2,1,0]
 },
-
 {
 q:"彼は、あなたが楽しめているかを気にしてくれましたか？",
-o:[
-"あなたの表情や反応をよく見ながら、話題や行き先などを合わせようとしてくれた",
-"あなたの反応を見ながら、楽しめているか気にしてくれる様子が何度かあった",
-"そうした様子はあまり見られなかった",
-"あなたの反応を気にする様子はほとんど見られなかった"
-],
+o:["あなたの表情や反応をよく見ながら、話題や行き先などを合わせようとしてくれた","あなたの反応を見ながら、楽しめているか気にしてくれる様子が何度かあった","そうした様子はあまり見られなかった","あなたの反応を気にする様子はほとんど見られなかった"],
 p:[3,2,1,0]
 },
-
 {
 q:"彼から、あなたを気遣う言葉や行動はありましたか？",
-o:[
-"あなたの様子に気づいて声をかけるだけでなく、歩く速さを合わせたり休憩を提案したりするなど、実際に行動してくれた",
-"「疲れてない？」「寒くない？」「大丈夫？」など、彼から気遣う言葉があった",
-"気遣う言葉や行動はあまり見られなかった",
-"あなたの様子を気にするような言葉や行動はほとんど見られなかった"
-],
+o:["あなたの様子に気づいて声をかけるだけでなく、歩く速さを合わせたり休憩を提案したりするなど、実際に行動してくれた","「疲れてない？」「寒くない？」「大丈夫？」など、彼から気遣う言葉があった","気遣う言葉や行動はあまり見られなかった","あなたの様子を気にするような言葉や行動はほとんど見られなかった"],
 p:[3,2,1,0]
 },
-
 {
 q:"会っている間、彼はあなたとの会話や時間にしっかり向き合ってくれましたか？",
-o:[
-"あなたの話をしっかり聞き、彼からも話題を出したり反応したりしながら、二人の時間にしっかり向き合ってくれた",
-"会話が途切れることはあっても、基本的にはあなたとの会話や時間に向き合ってくれた",
-"スマホや周囲を気にすることが多かったり、会話への反応が薄かったりする場面があった",
-"スマホを頻繁に見たり、あなたが話していても反応が薄かったりして、二人の時間にあまり向き合っていないように感じた"
-],
+o:["あなたの話をしっかり聞き、彼からも話題を出したり反応したりしながら、二人の時間にしっかり向き合ってくれた","会話が途切れることはあっても、基本的にはあなたとの会話や時間に向き合ってくれた","スマホや周囲を気にすることが多かったり、会話への反応が薄かったりする場面があった","スマホを頻繁に見たり、あなたが話していても反応が薄かったりして、二人の時間にあまり向き合っていないように感じた"],
 p:[3,2,1,0]
 },
-
 {
 q:"彼から、あなたへの好意が伝わる言葉や行動はありましたか？",
 multi:true,
-o:[
-"「可愛い」「綺麗」など、あなた自身を褒めてくれた",
-"「○○ちゃんみたいな人がタイプ」など、あなたが恋愛対象だと分かるような言葉があった",
-"「彼氏いるの？」「どんな人がタイプ？」など、あなたの恋愛について聞いてきた",
-"「○○ちゃんのこういうところ好き」など、あなたの性格や考え方を褒めてくれた",
-"手をつなぐなど、彼から自然に身体的な距離を縮めてきた",
-"特にそうした言葉や行動はなかった"
-],
+o:["「可愛い」「綺麗」など、あなた自身を褒めてくれた","「○○ちゃんみたいな人がタイプ」など、あなたが恋愛対象だと分かるような言葉があった","「彼氏いるの？」「どんな人がタイプ？」など、あなたの恋愛について聞いてきた","「○○ちゃんのこういうところ好き」など、あなたの性格や考え方を褒めてくれた","手をつなぐなど、彼から自然に身体的な距離を縮めてきた","特にそうした言葉や行動はなかった"],
 p:[1,3,1,2,1,0]
 },
-
 {
 q:"デート中に、彼から次に二人で会う話が出ましたか？",
-o:[
-"彼から「次は○○行こう」「○日空いてる？」など、次に会う具体的な提案があった",
-"彼から「また会おう」「またご飯行こう」など、次も会いたいという言葉があった",
-"あなたから次に会う話をしたら、「行こう」「また会おう」など前向きに応えてくれた",
-"あなたから次に会う話をしたが、曖昧な返事だったり話が進まなかった",
-"お互いに次に会う話はしなかった"
-],
+o:["彼から「次は○○行こう」「○日空いてる？」など、次に会う具体的な提案があった","彼から「また会おう」「またご飯行こう」など、次も会いたいという言葉があった","あなたから次に会う話をしたら、「行こう」「また会おう」など前向きに応えてくれた","あなたから次に会う話をしたが、曖昧な返事だったり話が進まなかった","お互いに次に会う話はしなかった"],
 p:[5,4,2,0,0]
 },
-
 {
 q:"デートが終わったあと、彼からLINEが来ましたか？",
-o:[
-"あなたから送る前に、彼から「今日はありがとう」「楽しかった」「無事着いた？」などのLINEが来た",
-"あなたから先にLINEを送った",
-"まだどちらからもLINEしていない"
-],
+o:["あなたから送る前に、彼から「今日はありがとう」「楽しかった」「無事着いた？」などのLINEが来た","あなたから先にLINEを送った","まだどちらからもLINEしていない"],
 p:[2,null,null]
 },
-
 {
 q:"デート後のLINEで、彼からも会話を続けようとしてくれましたか？",
-o:[
-"彼から質問したり新しい話題を出したりして、会話を続けようとしてくれた",
-"彼から質問や新しい話題はなかったけれど、あなたの話に反応しながら自然に何往復かLINEが続いた",
-"返信はあったけれど、「ありがとう」「うん」など短い返事で会話が終わった",
-"あなたからLINEを送ったが、現時点ではまだ返信がない",
-"まだデート後にLINEをしていない"
-],
+o:["彼から質問したり新しい話題を出したりして、会話を続けようとしてくれた","彼から質問や新しい話題はなかったけれど、あなたの話に反応しながら自然に何往復かLINEが続いた","返信はあったけれど、「ありがとう」「うん」など短い返事で会話が終わった","あなたからLINEを送ったが、現時点ではまだ返信がない","まだデート後にLINEをしていない"],
 p:[3,2,0,null,null]
 },
-
 {
 q:"あなたが「楽しかった」「また行きたい」と伝えたとき、彼はどう返してくれましたか？",
-o:[
-"「俺もまた会いたい」「次は○○行こう」など、彼からも次に会いたい気持ちが伝わる返事があった",
-"「俺も楽しかった」「また行こう」など、あなたの気持ちに同じように好意的な返事があった",
-"「ありがとう」「こちらこそ」などの返事はあったが、彼の気持ちまでは分からなかった",
-"返事はあったが、「また行きたい」というあなたの言葉には特に触れなかった",
-"まだ「楽しかった」「また行きたい」と伝えていない"
-],
+o:["「俺もまた会いたい」「次は○○行こう」など、彼からも次に会いたい気持ちが伝わる返事があった","「俺も楽しかった」「また行こう」など、あなたの気持ちに同じように好意的な返事があった","「ありがとう」「こちらこそ」などの返事はあったが、彼の気持ちまでは分からなかった","返事はあったが、「また行きたい」というあなたの言葉には特に触れなかった","まだ「楽しかった」「また行きたい」と伝えていない"],
 p:[4,3,1,0,null]
 },
-
 {
 q:"デート後のLINEで、彼からその日のデートについて触れてくれましたか？",
-o:[
-"「今日の○○楽しかった」など、彼から具体的な出来事を振り返ってくれた",
-"「今日は楽しかった」「会えてよかった」など、デートについて彼から好意的な言葉があった",
-"あなたからデートの話を出したら、彼も楽しそうに振り返ってくれた",
-"デートについて特に触れることはなかった",
-"まだデート後にLINEをしていない／判断できない"
-],
+o:["「今日の○○楽しかった」など、彼から具体的な出来事を振り返ってくれた","「今日は楽しかった」「会えてよかった」など、デートについて彼から好意的な言葉があった","あなたからデートの話を出したら、彼も楽しそうに振り返ってくれた","デートについて特に触れることはなかった","まだデート後にLINEをしていない／判断できない"],
 p:[3,2,1,0,null]
 },
-
 {
 q:"デート後、彼からもう一度会おうとする言葉や行動がありましたか？",
-o:[
-"彼から「○日空いてる？」「次いつ休み？」など、具体的に予定を決めようとしてくれた",
-"彼から「次は○○行こう」「今度○○食べに行こう」など、次に行く場所やしたいことを具体的に提案してくれた",
-"彼から「また会おう」「またご飯行こう」など、もう一度会いたいという言葉があった",
-"デート中にすでに彼から次のデートへの誘いや具体的な話があった",
-"あなたから次に会う話をしたら、彼も前向きに応えてくれた",
-"今のところ、次に会う話は出ていない",
-"デートからまだ時間が経っていないので、判断できない"
-],
+o:["彼から「○日空いてる？」「次いつ休み？」など、具体的に予定を決めようとしてくれた","彼から「次は○○行こう」「今度○○食べに行こう」など、次に行く場所やしたいことを具体的に提案してくれた","彼から「また会おう」「またご飯行こう」など、もう一度会いたいという言葉があった","デート中にすでに彼から次のデートへの誘いや具体的な話があった","あなたから次に会う話をしたら、彼も前向きに応えてくれた","今のところ、次に会う話は出ていない","デートからまだ時間が経っていないので、判断できない"],
 p:[5,4,3,null,1,0,null]
 }
-
 ];
 
-
-let answers=
-JSON.parse(
-localStorage.getItem("kimochiAnswers2") || "[]"
-);
-
+let answers=JSON.parse(localStorage.getItem("kimochiAnswers2")||"[]");
 let i=0;
-
 const $=id=>document.getElementById(id);
 
-
 function screen(id){
-
-["start","quiz","done","result"].forEach(
-x=>$(x).classList.toggle("hidden",x!==id)
-);
-
+["start","quiz","done","result"].forEach(x=>$(x).classList.toggle("hidden",x!==id));
 window.scrollTo(0,0);
-
 }
 
-
 function startCheck(){
-
 i=0;
 screen("quiz");
 render();
-
 }
-
 
 function render(){
 
 $("count").textContent=`${i+1} / 13`;
-
-$("bar").style.width=
-`${((i+1)/13)*100}%`;
-
-$("qno").textContent=
-`QUESTION ${String(i+1).padStart(2,"0")}`;
-
+$("bar").style.width=`${((i+1)/13)*100}%`;
+$("qno").textContent=`QUESTION ${String(i+1).padStart(2,"0")}`;
 $("question").textContent=qs[i].q;
-
-$("hint").classList.toggle(
-"hidden",
-!qs[i].multi
-);
+$("hint").classList.toggle("hidden",!qs[i].multi);
 
 let a=answers[i];
 
-$("options").innerHTML=
-qs[i].o.map((t,k)=>{
+$("options").innerHTML=qs[i].o.map((t,k)=>{
 
-let selected=
-qs[i].multi
-?Array.isArray(a) && a.includes(k)
+let selected=qs[i].multi
+?Array.isArray(a)&&a.includes(k)
 :a===k;
 
-return `
-<button
-class="option ${selected ? "selected" : ""}"
-onclick="choose(${k})"
->
-${selected ? "✓ " : ""}${t}
-</button>
-`;
+return `<button class="option ${selected?"selected":""}" onclick="choose(${k})">${selected?"✓ ":""}${t}</button>`;
 
 }).join("");
 
-$("next").textContent=
-i===12
-?"回答を完了する →"
-:"次へ →";
+$("next").textContent=i===12?"回答を完了する →":"次へ →";
 
 }
-
 
 function choose(k){
 
 if(qs[i].multi){
 
-let a=
-Array.isArray(answers[i])
-?[...answers[i]]
-:[];
-
+let a=Array.isArray(answers[i])?[...answers[i]]:[];
 const none=5;
 
 if(k===none){
-
-a=
-a.includes(none)
-?[]
-:[none];
-
+a=a.includes(none)?[]:[none];
 }else{
-
 a=a.filter(x=>x!==none);
-
-a=
-a.includes(k)
-?a.filter(x=>x!==k)
-:[...a,k];
-
+a=a.includes(k)?a.filter(x=>x!==k):[...a,k];
 }
 
 answers[i]=a;
 
 }else{
-
 answers[i]=k;
-
 }
 
-localStorage.setItem(
-"kimochiAnswers2",
-JSON.stringify(answers)
-);
-
+localStorage.setItem("kimochiAnswers2",JSON.stringify(answers));
 render();
 
 }
-
 
 function next(){
 
 let a=answers[i];
 
-if(
-a===undefined ||
-(
-qs[i].multi &&
-(!a || !a.length)
-)
-){
-
+if(a===undefined||(qs[i].multi&&(!a||!a.length))){
 alert("回答を選んでください");
 return;
-
 }
 
 if(i<12){
-
 i++;
 render();
 window.scrollTo(0,0);
-
 }else{
-
 screen("done");
-
 }
 
 }
-
 
 function back(){
 
 if(i===0){
-
 screen("start");
-
 }else{
-
 i--;
 render();
 window.scrollTo(0,0);
-
 }
 
 }
@@ -994,114 +841,42 @@ window.scrollTo(0,0);
 
 function resultData(){
 
-let base=
-answers.slice(0,6).reduce(
-(s,a,j)=>
-s+(
-Number.isInteger(a)
-?qs[j].p[a]
-:0
-),
-0
-);
+let base=answers.slice(0,6).reduce((s,a,j)=>s+(Number.isInteger(a)?qs[j].p[a]:0),0);
 
-let q7=
-Array.isArray(answers[6])
-?answers[6]
-:[];
+let q7=Array.isArray(answers[6])?answers[6]:[];
 
-let q7score=
-q7.reduce(
-(s,k)=>s+qs[6].p[k],
-0
-);
+let q7score=q7.reduce((s,k)=>s+qs[6].p[k],0);
 
 let strong=[];
 
-if(q7.includes(1)) strong.push("q7type");
-if(q7.includes(3)) strong.push("q7like");
+if(q7.includes(1))strong.push("q7type");
+if(q7.includes(3))strong.push("q7like");
+if(answers[7]===0)strong.push("q8A");
+if(answers[7]===1)strong.push("q8B");
+if(answers[10]===0)strong.push("q11A");
+if(answers[12]===0)strong.push("q13A");
+if(answers[12]===1)strong.push("q13B");
 
-if(answers[7]===0) strong.push("q8A");
-if(answers[7]===1) strong.push("q8B");
+let action=strong.some(x=>["q8A","q8B","q11A","q13A","q13B"].includes(x));
 
-if(answers[10]===0) strong.push("q11A");
+let post=[8,9,10,11].filter(j=>Number.isInteger(answers[j])&&qs[j].p[answers[j]]>0).length;
 
-if(answers[12]===0) strong.push("q13A");
-if(answers[12]===1) strong.push("q13B");
-
-let action=
-strong.some(
-x=>[
-"q8A",
-"q8B",
-"q11A",
-"q13A",
-"q13B"
-].includes(x)
-);
-
-let post=
-[8,9,10,11].filter(
-j=>
-Number.isInteger(answers[j]) &&
-qs[j].p[answers[j]]>0
-).length;
-
-let known=
-[8,9,10,11,12].filter(
-j=>
-Number.isInteger(answers[j]) &&
-qs[j].p[answers[j]]!==null
-).length;
+let known=[8,9,10,11,12].filter(j=>Number.isInteger(answers[j])&&qs[j].p[answers[j]]!==null).length;
 
 let level;
 
-if(
-strong.length>=2 &&
-action &&
-base>=12
-){
-
+if(strong.length>=2&&action&&base>=12){
 level="heart";
-
-}else if(
-(
-strong.length>=1 &&
-base>=9
-) ||
-(
-strong.length===0 &&
-base>=12 &&
-post>=2
-)
-){
-
+}else if((strong.length>=1&&base>=9)||(strong.length===0&&base>=12&&post>=2)){
 level="flower";
-
-}else if(
-base>=6 ||
-q7score>0 ||
-post>=2
-){
-
+}else if(base>=6||q7score>0||post>=2){
 level="sprout";
-
 }else{
-
 level="search";
-
 }
 
-if(
-known<=1 &&
-!(
-(answers[7]===0 || answers[7]===1) &&
-base>=12
-)
-){
-
+if(known<=1&&!((answers[7]===0||answers[7]===1)&&base>=12)){
 level="search";
-
 }
 
 return level;
@@ -1155,31 +930,23 @@ search:[
 
 
 /* =========================
-   💗 お祝い演出
+   💗 ゆっくりお祝い演出
 ========================= */
 
 function celebrateHeart(){
 
-const old=
-document.getElementById("confettiContainer");
+const old=document.getElementById("confettiContainer");
 
-if(old){
-old.remove();
-}
+if(old)old.remove();
 
-document
-.querySelectorAll(".party-pop")
-.forEach(el=>el.remove());
+document.querySelectorAll(".party-pop").forEach(el=>el.remove());
 
-
-const container=
-document.createElement("div");
+const container=document.createElement("div");
 
 container.id="confettiContainer";
 container.className="confetti-container";
 
 document.body.appendChild(container);
-
 
 const colors=[
 "#ff5f7d",
@@ -1190,79 +957,59 @@ const colors=[
 "#64d8cb"
 ];
 
+for(let n=0;n<80;n++){
 
-for(let n=0;n<70;n++){
-
-const piece=
-document.createElement("div");
+const piece=document.createElement("div");
 
 piece.className="confetti";
 
-piece.style.left=
-`${Math.random()*100}%`;
+piece.style.left=`${Math.random()*100}%`;
 
-piece.style.background=
-colors[
-Math.floor(
-Math.random()*colors.length
-)
-];
+piece.style.background=colors[Math.floor(Math.random()*colors.length)];
 
-piece.style.animationDelay=
-`${Math.random()*.35}s`;
+piece.style.animationDelay=`${Math.random()*.8}s`;
 
-piece.style.animationDuration=
-`${1.4+Math.random()*.8}s`;
+/* 3.3〜4.3秒かけてゆっくり落ちる */
+piece.style.animationDuration=`${3.3+Math.random()*1}s`;
 
 piece.style.setProperty(
 "--drift",
-`${-100+Math.random()*200}px`
+`${-130+Math.random()*260}px`
 );
 
 piece.style.setProperty(
 "--rotate",
-`${360+Math.random()*720}deg`
+`${540+Math.random()*900}deg`
 );
 
-const size=
-6+Math.random()*7;
+const size=6+Math.random()*7;
 
-piece.style.width=
-`${size}px`;
-
-piece.style.height=
-`${size*1.5}px`;
+piece.style.width=`${size}px`;
+piece.style.height=`${size*1.5}px`;
 
 container.appendChild(piece);
 
 }
 
-
-const left=
-document.createElement("div");
-
+const left=document.createElement("div");
 left.className="party-pop left";
 left.textContent="🎉";
 
-
-const right=
-document.createElement("div");
-
+const right=document.createElement("div");
 right.className="party-pop right";
 right.textContent="🎉";
-
 
 document.body.appendChild(left);
 document.body.appendChild(right);
 
-
+/* 最後の紙吹雪が落ち切ってから削除 */
 setTimeout(()=>{
 
-container.remove();
-left.remove();
-right.remove();
+if(container.isConnected)container.remove();
+if(left.isConnected)left.remove();
+if(right.isConnected)right.remove();
 
-},2400);
+},5400);
 
 }
 
@@ -1274,7 +1021,6 @@ right.remove();
 function showResult(){
 
 let level=resultData();
-
 let c=copy[level];
 
 $("rEmoji").textContent=c[0];
@@ -1285,21 +1031,11 @@ let items=[];
 
 answers.forEach((a,j)=>{
 
-if(
-j===6 &&
-Array.isArray(a)
-){
+if(j===6&&Array.isArray(a)){
 
-a.filter(k=>k!==5)
-.forEach(
-k=>items.push(qs[j].o[k])
-);
+a.filter(k=>k!==5).forEach(k=>items.push(qs[j].o[k]));
 
-}else if(
-Number.isInteger(a) &&
-qs[j].p[a]!=null &&
-qs[j].p[a]>0
-){
+}else if(Number.isInteger(a)&&qs[j].p[a]!=null&&qs[j].p[a]>0){
 
 items.push(qs[j].o[a]);
 
@@ -1307,62 +1043,36 @@ items.push(qs[j].o[a]);
 
 });
 
-
-$("confirmed").innerHTML=
-items.length
-?items.map(
-x=>`<div class="checkitem">✓ ${x}</div>`
-).join("")
-:`今はまだ、はっきり確認できた行動が少なくても大丈夫。これから見えてくる行動もあります。`;
-
+$("confirmed").innerHTML=items.length
+?items.map(x=>`<div class="checkitem">✓ ${x}</div>`).join("")
+:"今はまだ、はっきり確認できた行動が少なくても大丈夫。これから見えてくる行動もあります。";
 
 $("watch").innerHTML=c[3];
-
 $("advice").innerHTML=c[4];
-
 $("message").innerHTML=c[5];
-
 
 screen("result");
 
-
 if(level==="heart"){
-
-setTimeout(
-celebrateHeart,
-250
-);
-
+setTimeout(celebrateHeart,250);
 }
 
 }
 
 
 function restart(){
-
 i=0;
-
 screen("quiz");
-
 render();
-
 }
 
 
 function resetAll(){
 
-if(
-confirm(
-"すべての回答をリセットしますか？"
-)
-){
+if(confirm("すべての回答をリセットしますか？")){
 
 answers=[];
-
-localStorage.removeItem(
-"kimochiAnswers2"
-);
-
+localStorage.removeItem("kimochiAnswers2");
 screen("start");
 
 }
